@@ -1,0 +1,113 @@
+{
+  "name": "Events API - Frontend",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "events",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -416,
+        -16
+      ],
+      "id": "d960f12b-6031-4356-836e-6622ea3c4dbd",
+      "name": "Webhook",
+      "webhookId": "e3dda67a-afb6-4949-b4ed-f95468700073"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1enCmB6AMF3DPEIZsV0gyVHCD-8Eus0zb14xfKjWGzD8",
+          "mode": "list",
+          "cachedResultName": "India Sports Events Automation spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1enCmB6AMF3DPEIZsV0gyVHCD-8Eus0zb14xfKjWGzD8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2072548026,
+          "mode": "list",
+          "cachedResultName": "Events",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1enCmB6AMF3DPEIZsV0gyVHCD-8Eus0zb14xfKjWGzD8/edit#gid=2072548026"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -192,
+        -16
+      ],
+      "id": "77fd53ec-c55a-4685-b21d-eb326a892f55",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "h8L4piO2zZrumvxQ",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $input.all().map(item => item.json) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        32,
+        -16
+      ],
+      "id": "989a2cd1-a4ce-487f-a74d-ca893d2685c2",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b5283539-b588-4eca-8307-6e31c097d519",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "81423312ecf014d7bf1cc57ecd45ad3b694a9b895bae6f55670c90e7032e5de9"
+  },
+  "nodeGroups": [],
+  "id": "T3AZpS2swSWWiXa0",
+  "tags": []
+}
