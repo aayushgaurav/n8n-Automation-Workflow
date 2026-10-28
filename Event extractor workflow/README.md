@@ -12,7 +12,7 @@ Identify important event information such as:
 - Registration link
 
 ## Workflow
-To be added.
+Added
 
 ## Tools
 - n8n
