@@ -1,0 +1,417 @@
+{
+  "name": "Routine Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZBZygJ374e31VDfxE2JRAjqKGNogBN8H02rKLvQKbnU",
+          "mode": "list",
+          "cachedResultName": "Routine spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZBZygJ374e31VDfxE2JRAjqKGNogBN8H02rKLvQKbnU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Routine",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZBZygJ374e31VDfxE2JRAjqKGNogBN8H02rKLvQKbnU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "task_id": "={{$json.body.task_id}}",
+            "task_name ": "={{$json.body.task_name}}",
+            "description": "={{$json.body.description}}",
+            " scheduled_time ": "={{$json.body.scheduled_time}}",
+            "estimated_duration": "={{$json.body.estimated_duration}}",
+            "days_of_week": "={{$json.body.days_of_week}}",
+            "category": "={{$json.body.category}}",
+            " active": "={{$json.body.active}}",
+            " display_order ": "={{$json.body.display_order}}",
+            " updated_at": "={{$json.body.updated_at}}"
+          },
+          "matchingColumns": [
+            "task_id"
+          ],
+          "schema": [
+            {
+              "id": "task_id",
+              "displayName": "task_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task_name ",
+              "displayName": "task_name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " scheduled_time ",
+              "displayName": " scheduled_time ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "estimated_duration",
+              "displayName": "estimated_duration",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "days_of_week",
+              "displayName": "days_of_week",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " active",
+              "displayName": " active",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " display_order ",
+              "displayName": " display_order ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " updated_at",
+              "displayName": " updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -144,
+        -32
+      ],
+      "id": "61564e03-b516-4258-9994-1ffe07036fbd",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ck7xbfT9bSU3g3YV",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true,\n  \"message\": \"Routine synced successfully\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        80,
+        -32
+      ],
+      "id": "1d295791-bec3-4695-91f9-5d45687795f8",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true,\n  \"message\": \"Task record synced successfully\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        80,
+        192
+      ],
+      "id": "8dde6f79-fabc-4dc1-9415-d0749b5a0d71",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "task-record-routine",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        -32
+      ],
+      "id": "6c934eea-2d0f-4610-a6c6-882025fde4c5",
+      "name": "task-record-routine",
+      "webhookId": "10187791-a11d-4cdf-afdf-2f1131f06782"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "task-record-completion",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        192
+      ],
+      "id": "2843d3a7-c6be-4cc7-98ab-16331db32da2",
+      "name": "task-record-completion",
+      "webhookId": "aa25408e-0adf-443a-804a-e116199646c7"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZBZygJ374e31VDfxE2JRAjqKGNogBN8H02rKLvQKbnU",
+          "mode": "list",
+          "cachedResultName": "Routine spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZBZygJ374e31VDfxE2JRAjqKGNogBN8H02rKLvQKbnU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1862247312,
+          "mode": "list",
+          "cachedResultName": "Task Records",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZBZygJ374e31VDfxE2JRAjqKGNogBN8H02rKLvQKbnU/edit#gid=1862247312"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "record_id": "={{$json.body.record_id}}",
+            "task_id": "={{$json.body.task_id}}",
+            "task_name": "={{$json.body.task_name}}",
+            "task_date": "={{$json.body.task_date}}",
+            "day_of_week": "={{$json.body.day_of_week}}",
+            "scheduled_time": "={{$json.body.scheduled_time}}",
+            "status": "={{$json.body.status}}",
+            "completed_at": "={{$json.body.completed_at}}",
+            "last_updated": "={{$json.body.last_updated}}"
+          },
+          "matchingColumns": [
+            "record_id"
+          ],
+          "schema": [
+            {
+              "id": "record_id",
+              "displayName": "record_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "task_id",
+              "displayName": "task_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "task_name",
+              "displayName": "task_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "task_date",
+              "displayName": "task_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "day_of_week",
+              "displayName": "day_of_week",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "scheduled_time",
+              "displayName": "scheduled_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "completed_at",
+              "displayName": "completed_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -144,
+        192
+      ],
+      "id": "b6f66c9c-b984-44ca-ab82-f8e90efa75e7",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ck7xbfT9bSU3g3YV",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "task-record-routine": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "task-record-completion": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6b66d939-ee39-446c-8533-c24adb553705",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "81423312ecf014d7bf1cc57ecd45ad3b694a9b895bae6f55670c90e7032e5de9"
+  },
+  "nodeGroups": [],
+  "id": "JYIDRwtMb83S10e2",
+  "tags": []
+}
